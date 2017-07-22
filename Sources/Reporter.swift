@@ -39,11 +39,11 @@ public func queuedPrint<T>(_ object: T, color: ANSI? = nil) {
     }
 }
 
-public func queuedPrintlnWarning(_ message: String) {
+public func queuedPrintlnWarning<T>(_ message: T) {
     queuedPrintln(message, color: .yellow)
 }
 
-public func queuedPrintlnError(_ string: String) {
+public func queuedPrintlnError<T>(_ string: T) {
     outputQueue.async {
         fflush(stdout)
         fputs("\(ANSI.red)\(string)\(ANSI.reset)", stderr)
