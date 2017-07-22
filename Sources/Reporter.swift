@@ -43,10 +43,10 @@ public func queuedPrintlnWarning<T>(_ message: T) {
     queuedPrintln(message, color: .yellow)
 }
 
-public func queuedPrintlnError<T>(_ string: T) {
+public func queuedPrintlnError<T>(_ object: T) {
     outputQueue.async {
         fflush(stdout)
-        fputs("\(ANSI.red)\(string)\(ANSI.reset)", stderr)
+        fputs("\(ANSI.red)\(object)\(ANSI.reset)", stderr)
     }
 }
 
