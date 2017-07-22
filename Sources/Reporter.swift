@@ -39,6 +39,10 @@ public func queuedPrint<T>(_ object: T, color: ANSI? = nil) {
     }
 }
 
+public func queuedPrintWarning<T>(_ message: T) {
+    queuedPrint(message, color: .yellow)
+}
+
 public func queuedPrintlnWarning<T>(_ message: T) {
     queuedPrintln(message, color: .yellow)
 }
