@@ -1,5 +1,5 @@
+import Foundation
 #if os(OSX) || os(tvOS) || os(watchOS) || os(iOS)
-  import Foundation
   import Darwin.libc
 #else
   import Glibc
