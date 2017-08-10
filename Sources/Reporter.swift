@@ -1,4 +1,5 @@
 import Foundation
+import Dispatch
 #if os(OSX) || os(tvOS) || os(watchOS) || os(iOS)
   import Darwin.libc
 #else
