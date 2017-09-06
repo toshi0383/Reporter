@@ -28,16 +28,24 @@ private let outputQueue: DispatchQueue = {
  - parameter object: Object to print.
  */
 public func queuedPrintln<T>(_ object: T, color: ANSI? = nil) {
+    let color = color?.description ?? ""
+    #if !os(Linux)
     outputQueue.async {
-        let color = color?.description ?? ""
         print("\(color)\(object)\(ANSI.reset)")
     }
+    #else
+        print("\(color)\(object)\(ANSI.reset)")
+    #endif
 }
 public func queuedPrint<T>(_ object: T, color: ANSI? = nil) {
+    let color = color?.description ?? ""
+    #if !os(Linux)
     outputQueue.async {
-        let color = color?.description ?? ""
         print("\(color)\(object)\(ANSI.reset)", terminator: "")
     }
+    #else
+        print("\(color)\(object)\(ANSI.reset)", terminator: "")
+    #endif
 }
 
 public func queuedPrintWarning<T>(_ message: T) {
