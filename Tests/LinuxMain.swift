@@ -3,7 +3,7 @@
 
 
 import XCTest
-import ReporterTests
+@testable import ReporterTests
 extension QueuedPrintTests {
   static var allTests: [(String, (QueuedPrintTests) -> () throws -> Void)] = [
     ("test001", test001),
