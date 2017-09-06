@@ -57,17 +57,27 @@ public func queuedPrintlnWarning<T>(_ message: T) {
 }
 
 public func queuedPrintError<T>(_ object: T) {
+    #if !os(Linux)
     outputQueue.async {
         fflush(stdout)
         fputs("\(ANSI.red)\(object)\(ANSI.reset)", stderr)
     }
+    #else
+        fflush(stdout)
+        fputs("\(ANSI.red)\(object)\(ANSI.reset)", stderr)
+    #endif
 }
 
 public func queuedPrintlnError<T>(_ object: T) {
+    #if !os(Linux)
     outputQueue.async {
         fflush(stdout)
         fputs("\(ANSI.red)\(object)\(ANSI.reset)\n", stderr)
     }
+    #else
+        fflush(stdout)
+        fputs("\(ANSI.red)\(object)\(ANSI.reset)\n", stderr)
+    #endif
 }
 
 public enum ANSI: String, CustomStringConvertible {
