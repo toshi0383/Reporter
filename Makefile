@@ -9,4 +9,4 @@ bootstrap:
 	$(PARAM) swift build
 	$(PARAM) swift package generate-xcodeproj
 sourcery:
-	$(SOURCERY) --templates Resources/SourceryTemplates/LinuxMain.stencil --sources Tests/ --output Tests/LinuxMain.swift
+	$(SOURCERY) --args testimports='import ReporterTests' --templates Resources/SourceryTemplates/LinuxMain.stencil --sources Tests/ --output Tests/LinuxMain.swift
