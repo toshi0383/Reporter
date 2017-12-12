@@ -1,6 +1,6 @@
 .PHONY = update bootstrap sourcery test
 SOURCERY ?= ./.build/debug/sourcery
-PARAM = SWIFTPM_DEVELOPMENT=YES
+PARAM = REPORTER_SWIFTPM_DEVELOPMENT=YES
 SWIFT ?= swift
 
 update:
