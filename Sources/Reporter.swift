@@ -30,21 +30,27 @@ private let outputQueue: DispatchQueue = {
 public func queuedPrintln<T>(_ object: T, color: ANSI? = nil) {
     let color = color?.description ?? ""
     #if !os(Linux)
-    outputQueue.async {
-        print("\(color)\(object)\(ANSI.reset)")
+    outputQueue.sync {
+        fputs("\(color)\(object)\(ANSI.reset)\n", stdout)
+        fflush(stdout)
     }
     #else
-        print("\(color)\(object)\(ANSI.reset)")
+        fputs("\(color)\(object)\(ANSI.reset)\n", stdout)
+        fflush(stdout)
     #endif
 }
+
+/// fflush at last
 public func queuedPrint<T>(_ object: T, color: ANSI? = nil) {
     let color = color?.description ?? ""
     #if !os(Linux)
-    outputQueue.async {
-        print("\(color)\(object)\(ANSI.reset)", terminator: "")
+    outputQueue.sync {
+        fputs("\(color)\(object)\(ANSI.reset)", stdout)
+        fflush(stdout)
     }
     #else
-        print("\(color)\(object)\(ANSI.reset)", terminator: "")
+        fputs("\(color)\(object)\(ANSI.reset)", stdout)
+        fflush(stdout)
     #endif
 }
 
@@ -58,25 +64,25 @@ public func queuedPrintlnWarning<T>(_ message: T) {
 
 public func queuedPrintError<T>(_ object: T) {
     #if !os(Linux)
-    outputQueue.async {
-        fflush(stdout)
+    outputQueue.sync {
         fputs("\(ANSI.red)\(object)\(ANSI.reset)", stderr)
+        fflush(stderr)
     }
     #else
-        fflush(stdout)
         fputs("\(ANSI.red)\(object)\(ANSI.reset)", stderr)
+        fflush(stderr)
     #endif
 }
 
 public func queuedPrintlnError<T>(_ object: T) {
     #if !os(Linux)
-    outputQueue.async {
-        fflush(stdout)
+    outputQueue.sync {
         fputs("\(ANSI.red)\(object)\(ANSI.reset)\n", stderr)
+        fflush(stderr)
     }
     #else
-        fflush(stdout)
         fputs("\(ANSI.red)\(object)\(ANSI.reset)\n", stderr)
+        fflush(stderr)
     #endif
 }
 
