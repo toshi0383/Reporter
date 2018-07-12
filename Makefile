@@ -1,14 +1,13 @@
 .PHONY = update bootstrap sourcery test
-SOURCERY ?= ./.build/debug/sourcery
-PARAM = REPORTER_SWIFTPM_DEVELOPMENT=YES
+SOURCERY ?= sourcery
 SWIFT ?= swift
 
 update:
-	$(PARAM) swift package update
+	swift package update
 
 bootstrap:
-	$(PARAM) swift build
-	$(PARAM) swift package generate-xcodeproj
+	swift build
+	swift package generate-xcodeproj
 test:
 	./scripts/test.sh
 sourcery:
